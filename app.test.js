@@ -1,6 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { formatDate, formatTime, isDuplicateTag, normalizeTag } from "./app.js";
+import {
+  formatDate,
+  formatTime,
+  getTagValidationMessage,
+  isDuplicateTag,
+  normalizeTag,
+} from "./app.js";
 
 test("formats a readable date and time", () => {
   const date = new Date("2026-08-18T14:05:09Z");
@@ -15,4 +21,13 @@ test("normalizes tag whitespace", () => {
 test("finds duplicate tags without case sensitivity", () => {
   assert.equal(isDuplicateTag(["Focused"], "focused"), true);
   assert.equal(isDuplicateTag(["Focused"], "rested"), false);
+});
+
+test("requires a tag with at least 10 normalized characters", () => {
+  assert.equal(getTagValidationMessage("   "), "Enter a tag.");
+  assert.equal(
+    getTagValidationMessage("  too   short  "),
+    "Tags must be at least 10 characters long.",
+  );
+  assert.equal(getTagValidationMessage("deep focus"), "");
 });

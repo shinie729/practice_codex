@@ -104,6 +104,8 @@ input {
   background: #fffdfa;
 }
 input:focus { border-color: #637b6f; outline: 3px solid rgb(99 123 111 / 18%); }
+input[aria-invalid="true"] { border-color: #9a3f34; }
+input[aria-invalid="true"]:focus { outline-color: rgb(154 63 52 / 18%); }
 .input-row > button {
   padding: .8rem 1.2rem;
   border: 0;
@@ -114,7 +116,8 @@ input:focus { border-color: #637b6f; outline: 3px solid rgb(99 123 111 / 18%); }
   cursor: pointer;
 }
 .input-row > button:hover { background: #30463b; }
-.tag-message { min-height: 1.2em; margin: .5rem 0 0; color: #9a3f34; font-size: .82rem; }
+.tag-requirements { margin: .45rem 0 0; color: #716d66; font-size: .82rem; }
+.tag-message { min-height: 1.2em; margin: .2rem 0 0; color: #9a3f34; font-size: .82rem; }
 
 @media (max-width: 480px) {
   .today-card { border-radius: 1.25rem; }

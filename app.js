@@ -1,5 +1,6 @@
 const STORAGE_KEY = "today-tags";
 const DEFAULT_TAGS = ["present", "grateful"];
+export const MIN_TAG_LENGTH = 10;
 
 export function formatDate(now, locale = undefined) {
   return new Intl.DateTimeFormat(locale, {
@@ -24,6 +25,17 @@ export function normalizeTag(value) {
 
 export function isDuplicateTag(tags, candidate) {
   return tags.some((tag) => tag.toLocaleLowerCase() === candidate.toLocaleLowerCase());
+}
+
+export function getTagValidationMessage(value) {
+  const tag = normalizeTag(value);
+
+  if (!tag) return "Enter a tag.";
+  if (tag.length < MIN_TAG_LENGTH) {
+    return `Tags must be at least ${MIN_TAG_LENGTH} characters long.`;
+  }
+
+  return "";
 }
 
 function init() {
@@ -70,16 +82,25 @@ function init() {
   formElement.addEventListener("submit", (event) => {
     event.preventDefault();
     const newTag = normalizeTag(inputElement.value);
-    messageElement.textContent = "";
-    if (!newTag) return;
+    const validationMessage = getTagValidationMessage(newTag);
+
+    messageElement.textContent = validationMessage;
+    inputElement.setAttribute("aria-invalid", String(Boolean(validationMessage)));
+    if (validationMessage) {
+      inputElement.focus();
+      return;
+    }
     if (isDuplicateTag(tags, newTag)) {
       messageElement.textContent = "That tag is already here.";
+      inputElement.setAttribute("aria-invalid", "true");
+      inputElement.focus();
       return;
     }
     tags.push(newTag);
     saveTags(tags);
     renderTags();
     formElement.reset();
+    inputElement.setAttribute("aria-invalid", "false");
     inputElement.focus();
   });
 
