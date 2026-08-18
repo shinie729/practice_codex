@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  DEFAULT_TAGS,
   formatDate,
   formatTime,
   getTagValidationMessage,
@@ -30,4 +31,11 @@ test("requires a tag with at least 10 normalized characters", () => {
     "Tags must be at least 10 characters long.",
   );
   assert.equal(getTagValidationMessage("deep focus"), "");
+});
+
+test("provides default tags that satisfy tag validation", () => {
+  assert.ok(DEFAULT_TAGS.length > 0);
+  DEFAULT_TAGS.forEach((tag) => {
+    assert.equal(getTagValidationMessage(tag), "");
+  });
 });

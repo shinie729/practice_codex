@@ -1,5 +1,5 @@
 const STORAGE_KEY = "today-tags";
-const DEFAULT_TAGS = ["present", "grateful"];
+export const DEFAULT_TAGS = ["present moment", "feeling grateful"];
 export const MIN_TAG_LENGTH = 10;
 
 export function formatDate(now, locale = undefined) {
