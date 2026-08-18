@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f0e8" />
+    <title>Today</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="today-card" aria-labelledby="page-title">
+        <div class="eyebrow">Right now</div>
+        <h1 id="page-title">Today</h1>
+        <p id="date" class="date" aria-live="polite"></p>
+        <time id="time" class="time" aria-live="off"></time>
+        <p id="timezone" class="timezone"></p>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <section aria-labelledby="tags-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Make it yours</p>
+              <h2 id="tags-title">Tags</h2>
+            </div>
+            <span id="tag-count" class="tag-count"></span>
+          </div>
+
+          <ul id="tag-list" class="tag-list" aria-live="polite"></ul>
+
+          <form id="tag-form" class="tag-form">
+            <label for="tag-input">Add a tag</label>
+            <div class="input-row">
+              <input
+                id="tag-input"
+                name="tag"
+                type="text"
+                maxlength="24"
+                placeholder="e.g. focused"
+                autocomplete="off"
+                required
+              />
+              <button type="submit">Add</button>
+            </div>
+            <p id="tag-message" class="tag-message" role="status"></p>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
