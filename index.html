@@ -29,21 +29,24 @@
 
           <ul id="tag-list" class="tag-list" aria-live="polite"></ul>
 
-          <form id="tag-form" class="tag-form">
+          <form id="tag-form" class="tag-form" novalidate>
             <label for="tag-input">Add a tag</label>
             <div class="input-row">
               <input
                 id="tag-input"
                 name="tag"
                 type="text"
+                minlength="10"
                 maxlength="24"
-                placeholder="e.g. focused"
+                placeholder="e.g. deep focus"
                 autocomplete="off"
+                aria-describedby="tag-requirements tag-message"
                 required
               />
               <button type="submit">Add</button>
             </div>
-            <p id="tag-message" class="tag-message" role="status"></p>
+            <p id="tag-requirements" class="tag-requirements">Use at least 10 characters.</p>
+            <p id="tag-message" class="tag-message" role="alert"></p>
           </form>
         </section>
       </section>
